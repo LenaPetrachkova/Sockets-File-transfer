@@ -1,0 +1,11 @@
+2023-05-25 00:01:22,728 - INFO - Client started.
+2023-05-25 00:01:22,729 - INFO - Connected to a server.
+2023-05-25 00:01:22,729 - INFO - Got welcome message.
+2023-05-25 00:01:26,719 - INFO - Sent request: who
+2023-05-25 00:01:26,719 - INFO - Received message: Hello! My name is Lena Petrachkova. My group is K-16. File transfer, ¹2
+2023-05-25 00:01:47,567 - INFO - Sent request: Send file
+2023-05-25 00:01:47,567 - INFO - Received message: Received file
+2023-05-25 00:01:53,475 - INFO - Sent request: End
+2023-05-25 00:01:53,475 - INFO - Received message: Stop
+2023-05-25 00:01:53,476 - INFO - End of session
+2023-05-25 00:01:53,476 - INFO - Connection closed.
