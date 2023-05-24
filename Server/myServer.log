@@ -3,7 +3,7 @@
 2023-05-25 00:01:22,729 - INFO - Sent a welcome message.
 2023-05-25 00:01:22,729 - INFO - Listening to a client.
 2023-05-25 00:01:26,719 - INFO - Received message: who
-2023-05-25 00:01:26,719 - INFO - Sent message: Hello! My name is Lena Petrachkova. My group is K-16. File transfer, ¹2
+2023-05-25 00:01:26,719 - INFO - Sent message: information about me
 2023-05-25 00:01:42,396 - INFO - Received message: Send file
 2023-05-25 00:01:47,566 - INFO - Sent message: Received file textFile.txt
 2023-05-25 00:01:53,475 - INFO - Received message: End
