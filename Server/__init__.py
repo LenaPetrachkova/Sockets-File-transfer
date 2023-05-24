@@ -4,19 +4,19 @@ import datetime
 import os
 
 
-HOST = '127.0.0.1'   # Адреса хоста
-PORT = 1025 + 2      # Порт
-utf = 'utf-8'        # Кодування
-BUFSIZE = 1024       # Розмір буфера
+HOST = '127.0.0.1'   # Host address
+PORT = 1025 + 2      # Port
+utf = 'utf-8'        # Enoding
+BUFSIZE = 1024       # Buffer size
 
 class Server:
     def __init__(self):
 
-        # Створення об'єкта сокету:
+        # Create a socket object:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         try:
 
-            # Налаштування журналювання подій:
+            # Configure event logging:
             logging.getLogger("Server")
             logging.basicConfig(filename="myServer.log",
                                 level=logging.INFO,
@@ -25,7 +25,7 @@ class Server:
                                 )
             logging.info("Server started")
 
-            # Прив'язка сокета до адреси хоста і порту:
+            # Bind the socket to the host address and port:
             try:
                 sock.bind((HOST, PORT))
             except OSError:
@@ -33,14 +33,14 @@ class Server:
                 logging.warning("HOST IS USED. ")
                 exit()
 
-            # Прослуховування вхідних з'єднань:
+            # Listen for incoming connections:
             sock.listen(10)
             connection, client_address = sock.accept()
 
             print("Connected: ", client_address)
             logging.info("Connected to a client. ")
 
-            # Welcome повідомлення для клієнта:
+            # Send a welcome message to the client:
             for sentence in self.welcomeMessage():
                 connection.send(sentence.encode(utf))
             logging.info("Sent a welcome message.")
@@ -51,7 +51,7 @@ class Server:
             try:
                 while True:
 
-                    # Отримання даних від клієнта:
+                    # Receive data from the client:
                     data = connection.recv(256).decode(utf)
                     logging.info(f'Received message: {data}')
                     print(data)
@@ -67,7 +67,7 @@ class Server:
                         file_name = connection.recv(BUFSIZE).decode()
                         logging.info("Sent message: " + results + " " + file_name)
 
-                        # Отримання та збереження файла, відправлений клієнтом:
+                        # Receive and save the file sent by the client:
                         f = open(file_name, 'wb')
                         file_size = os.path.getsize("C:\\Users\\Professional\\PycharmProjects\\laba_Socket\\Client\\" + file_name)
 
@@ -76,16 +76,16 @@ class Server:
                         while True:
                             taken_data = connection.recv(BUFSIZE)
                             f.write(taken_data)
-                            time1: int = (datetime.datetime.now() - time).microseconds   # Обчислюється час, який пройшов з початку отримання першого блоку даних.
-                            take_file_size += len(taken_data)  # Обчислюється загальний розмір отриманих даних, додаючи до нього довжину останнього блоку даних.
+                            time1: int = (datetime.datetime.now() - time).microseconds   # Calculate the time elapsed since receiving the first block of data.
+                            take_file_size += len(taken_data)  # Calculate the total size of received data by adding the length of the last block of data.
                             file_size1 = take_file_size
-                            if time1 > 0:    # Швидкість отримання даних розраховується як відношення довжини останнього блоку даних до часу, що пройшов.
+                            if time1 > 0:    # Calculate the data transfer speed as the ratio of the length of the last block of data to the time elapsed.
                                 speed = len(taken_data) / time1
                             else:
                                 speed = 0
                             print("За цей раз прийнято: ", len(taken_data))
                             print("Загалом прийнято: ", take_file_size)
-                            print(100 / (file_size / file_size1), "%")  # Відсоток завершення передачі файлу, розрахований як співвідношення поточного розміру файлу до загального розміру.
+                            print(100 / (file_size / file_size1), "%")  # Calculate the percentage of file transfer completion as the ratio of the current file size to the total size.
                             print("Speed = ", speed)
                             print("")
                             if take_file_size == file_size:
